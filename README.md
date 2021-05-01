@@ -1,4 +1,4 @@
 # VolumeMixer
-Arduino Project to control Volume Mixer
+Arduino Project which control Volume Mixer in Windows
 ## Dependencies
 - SFML x64
