@@ -4,6 +4,7 @@
 #include <TlHelp32.h>
 
 #include "Debugger.h"
+#include "Config.h"
 
 class Process {
 
@@ -22,7 +23,7 @@ private:
 	DWORD getProcessId();
 	std::wstring getProcessName();
 
-	float adjustAmount = 0.1f;
+	float adjustAmount = 0.05f;
 
 public:
 	//VARIABLE
@@ -32,7 +33,7 @@ public:
 	//FUNCTION
 	Process(IAudioSessionControl*);
 	~Process();
-	
+
 	float getVolume();
 	void setVolume(float);
 	void adjustVolume(float);

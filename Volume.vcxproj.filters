@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Seria">
       <UniqueIdentifier>{c14740c7-7626-41c6-a3e6-8947da514047}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Util">
+      <UniqueIdentifier>{015bfcce-8503-4016-82e6-99a691acdcb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Util">
+      <UniqueIdentifier>{eb938a86-c609-48b5-9f61-55a592f7a01f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -41,9 +47,6 @@
     </ClCompile>
     <ClCompile Include="Process.cpp">
       <Filter>Source Files\Audio API</Filter>
-    </ClCompile>
-    <ClCompile Include="Debugger.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Audio.cpp">
       <Filter>Source Files\Audio API</Filter>
@@ -57,6 +60,12 @@
     <ClCompile Include="SerialClass.cpp">
       <Filter>Source Files\Seria</Filter>
     </ClCompile>
+    <ClCompile Include="Debugger.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Device.h">
@@ -64,9 +73,6 @@
     </ClInclude>
     <ClInclude Include="Process.h">
       <Filter>Header Files\Audio API</Filter>
-    </ClInclude>
-    <ClInclude Include="Debugger.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Audio.h">
       <Filter>Header Files\Audio API</Filter>
@@ -77,11 +83,17 @@
     <ClInclude Include="Slider.h">
       <Filter>Header Files\Window</Filter>
     </ClInclude>
-    <ClInclude Include="Util.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SerialClass.h">
       <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Debugger.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

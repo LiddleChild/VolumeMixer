@@ -12,6 +12,7 @@
 
 #include "Debugger.h"
 #include "Process.h"
+#include "Config.h"
 
 class Device {
 

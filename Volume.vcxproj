@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Debugger.cpp" />
     <ClCompile Include="main.cpp" />
@@ -166,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="Debugger.h" />
     <ClInclude Include="Process.h" />
