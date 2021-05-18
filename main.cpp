@@ -23,6 +23,28 @@ int windowTimer = -1, windowTimerMax = 100;
 int sel = 0, maxsel = 1;
 int windowVisible = 0;
 
+//Window event
+void onWindowOpen() {
+    log("main.cpp", "\u001b[32mWindow Open\u001b[0m");
+
+    log("main.cpp", "Updating all processes");
+    //Update all processes
+    log("main.cpp", "Update Core Audio API");
+    audio->updateProcess();
+    log("main.cpp", "Update window");
+    window->loadDevice(audio->getCurrentDevice());
+    maxsel = audio->getCurrentDevice()->getProcessCount() + 1;
+}
+
+//Window event
+void onWindowClose() {
+    log("main.cpp", "\u001b[32mWindow Close\u001b[0m");
+
+    //Select 0
+    sel = 0;
+    window->select(sel);
+}
+
 #pragma region Init Serial
 void initSerial() {
     sp = new Serial(config.port.c_str());
@@ -58,26 +80,10 @@ void hideConsole() {
 
 #pragma endregion
 
-//Window event
-void onWindowOpen() {
-    log("main.cpp", "\u001b[32mWindow Open\u001b[0m");
-
-    log("main.cpp", "Updating all processes");
-    //Update all processes
-    log("main.cpp", "Update Core Audio API");
+void updateAudioProcess() {
     audio->updateProcess();
-    log("main.cpp", "Update window");
     window->loadDevice(audio->getCurrentDevice());
     maxsel = audio->getCurrentDevice()->getProcessCount() + 1;
-}
-
-//Window event
-void onWindowClose() {
-    log("main.cpp", "\u001b[32mWindow Close\u001b[0m");
-
-    //Select 0
-    sel = 0;
-    window->select(sel);
 }
 
 int main() {
@@ -119,8 +125,10 @@ int main() {
 
             if (!window->isVisible()) onWindowOpen();
 
-            window->updateVolume(audio->getCurrentDevice()); //Update all volume
-            window->select(sel); //Update selector
+            //Update interface
+            window->updateVolume(audio->getCurrentDevice());
+            window->select(sel);
+
             if (windowTimer == -1) windowTimer = 0;
             else windowTimer = 1;
         }
