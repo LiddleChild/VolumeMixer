@@ -18,7 +18,7 @@ void Device::getAllProcess() {
 	hr = pSessionEnum->GetCount(&processCount);
 	error(hr, "(Device.cpp::getAllProcess) IAudioSessionEnumerator::GetCount");
 
-	log("Device.cpp", std::to_string(processCount) + " processes");
+	log("Device.cpp", std::to_string(processCount - 1) + " processes");
 
 	for (int i = 0; i < processCount; i++) {
 		IAudioSessionControl* pControl = nullptr;

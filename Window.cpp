@@ -20,7 +20,7 @@ Window::Window() {
     error(hr, "(Window.cpp::Window) DwmExtendFrameIntoClientArea");
 
     //Set background
-    background.setFillColor(sf::Color(0, 0, 0, 200));
+    background.setFillColor(sf::Color(0, 0, 0, 150));
     background.setSize(sf::Vector2f(WIDTH, HEIGHT));
     
     //Set view

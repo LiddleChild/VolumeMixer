@@ -28,14 +28,14 @@
     <Filter Include="Header Files\Serial">
       <UniqueIdentifier>{09fed366-811f-4f20-ba62-450d16917436}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Seria">
-      <UniqueIdentifier>{c14740c7-7626-41c6-a3e6-8947da514047}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Util">
       <UniqueIdentifier>{015bfcce-8503-4016-82e6-99a691acdcb3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{eb938a86-c609-48b5-9f61-55a592f7a01f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Serial">
+      <UniqueIdentifier>{c14740c7-7626-41c6-a3e6-8947da514047}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,7 +58,7 @@
       <Filter>Source Files\Window</Filter>
     </ClCompile>
     <ClCompile Include="SerialClass.cpp">
-      <Filter>Source Files\Seria</Filter>
+      <Filter>Source Files\Serial</Filter>
     </ClCompile>
     <ClCompile Include="Debugger.cpp">
       <Filter>Source Files\Util</Filter>

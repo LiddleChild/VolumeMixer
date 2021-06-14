@@ -38,7 +38,7 @@ void onWindowOpen() {
 
 //Window event
 void onWindowClose() {
-    log("main.cpp", "\u001b[32mWindow Close\u001b[0m");
+    log("main.cpp", "\u001b[32mWindow Close\u001b[0m\n");
 
     //Select 0
     sel = 0;
@@ -66,6 +66,7 @@ void initWASAPI() {
 void initWindow() {
     window = new Window();
     window->loadDevice(audio->getCurrentDevice());
+    windowTimer = 0;
 }
 #pragma endregion
 
@@ -95,7 +96,7 @@ int main() {
     initWASAPI();
     initWindow();
 
-    log("main.cpp", "\u001b[32mREADY\u001b[0m");
+    log("main.cpp", "\u001b[32mREADY\u001b[0m\n");
 
     char data[256];
     while (sp->IsConnected()) {
@@ -132,6 +133,7 @@ int main() {
             if (windowTimer == -1) windowTimer = 0;
             else windowTimer = 1;
         }
+
         //Hide window when not interacting with the amount of time
         if (windowTimer == 0) window->show();
         else if (windowTimer == windowTimerMax) { windowTimer = -1; window->hide(); onWindowClose(); }
