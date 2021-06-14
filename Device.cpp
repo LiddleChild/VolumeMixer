@@ -4,8 +4,7 @@
 
 void Device::getAllProcess() {
 	log("Device.cpp", "Getting all processes");
-	for (auto itr : processes) delete itr.second;
-	processes.clear();
+	clearProcess();
 
 	IAudioSessionManager2* pManager = NULL;
 	hr = pDevice->Activate(IID_IAudioSessionManager2, CLSCTX_ALL, NULL, (void**) &pManager);
@@ -37,12 +36,23 @@ void Device::getAllProcess() {
 		if (pid == 0) continue;
 
 		//Add to dict
-		Process* p = new Process(pControl);
-		processes[pid] = p;
+		std::wstring pname = getProcessName(pid);
+		std::wstring newpname = nameDict(pname);
+		
+		//Merge same process name into one process
+		if (processes[newpname] != nullptr)
+			processes[newpname]->addProcess(pControl);
+		else {
+			Process* p = new Process(newpname);
+			p->addProcess(pControl);
+			
+			processes[newpname] = p;
+		}
 
 		pControl2->Release();
 
-		wprintf(L"\t\t| (%5d) %s\n", pid, p->name.c_str());
+		if (pname == newpname) wprintf(L"\t\t| (%5d) %s\n", pid, pname.c_str());
+		else wprintf(L"\t\t| (%5d) %s (%s)\n", pid, pname.c_str(), newpname.c_str());
 	}
 
 	pManager->Release();
@@ -77,6 +87,25 @@ LPWSTR Device::getDeviceID() {
 }
 
 #pragma endregion
+#pragma region PRIVATE Device::clearProcess(): void
+
+void Device::clearProcess() {
+	for (auto itr : processes) delete itr.second;
+	processes.clear();
+}
+
+#pragma endregion
+#pragma region PRIVATE Device::nameDict(std::wstring): std::wstring
+
+std::wstring Device::nameDict(std::wstring name) {
+	std::map<std::wstring, std::wstring> dict;
+	dict[L"discord.exe"] = L"Discord";
+
+	return dict[name] == L"" ? name : dict[name];
+}
+
+#pragma endregion
+
 
 #pragma region PUBLIC Device::Device()
 
@@ -98,8 +127,7 @@ Device::Device(IMMDevice* device) {
 #pragma region PUBLIC Device::~Device()
 
 Device::~Device() {
-	for (auto itr : processes) delete itr.second;
-	processes.clear();
+	clearProcess();
 
 	pDevice->Release();
 	pVolume->Release();

@@ -1,10 +1,11 @@
 #pragma once
 
 #include <audiopolicy.h>
-#include <TlHelp32.h>
+#include <vector>
 
 #include "Debugger.h"
 #include "Config.h"
+#include "Util.h"
 
 class Process {
 
@@ -14,24 +15,26 @@ private:
 	const IID IID_IAudioSessionControl2 = __uuidof(IAudioSessionControl2);
 
 	//VARIABLE
-	IAudioSessionControl* pControl = NULL;
-	IAudioSessionControl2* pControl2 = NULL;
-	ISimpleAudioVolume* pVolume = NULL;
+	typedef struct {
+		IAudioSessionControl* pControl;
+		IAudioSessionControl2* pControl2;
+		ISimpleAudioVolume* pVolume;
+
+		DWORD id;
+		std::wstring name;
+	} ProcessData;
 
 	HRESULT hr = NULL;
-
-	DWORD getProcessId();
-	std::wstring getProcessName();
 
 	float adjustAmount = 0.05f;
 
 public:
 	//VARIABLE
-	DWORD id;
+	std::vector<ProcessData*> datas;
 	std::wstring name;
 
 	//FUNCTION
-	Process(IAudioSessionControl*);
+	Process(std::wstring);
 	~Process();
 
 	float getVolume();
@@ -39,4 +42,5 @@ public:
 	void adjustVolume(float);
 	void increment();
 	void decrement();
+	void addProcess(IAudioSessionControl*);
 };

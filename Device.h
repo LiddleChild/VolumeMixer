@@ -10,6 +10,7 @@
 #include <propvarutil.h>
 #include <audiopolicy.h>
 
+#include "Util.h"
 #include "Debugger.h"
 #include "Process.h"
 #include "Config.h"
@@ -26,7 +27,7 @@ private:
 	//VARIABLE
 	IMMDevice* pDevice = NULL;
 	IAudioEndpointVolume* pVolume = NULL;
-	std::map<DWORD, Process*> processes;
+	std::map<std::wstring, Process*> processes;
 	int processCount = 0;
 
 	HRESULT hr = NULL;
@@ -37,6 +38,8 @@ private:
 	PCWSTR getDeviceName();
 	LPWSTR getDeviceID();
 	void getAllProcess();
+	void clearProcess();
+	std::wstring nameDict(std::wstring);
 
 public:
 	//VARIABLE
