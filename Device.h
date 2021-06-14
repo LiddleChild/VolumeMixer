@@ -18,7 +18,6 @@
 class Device {
 
 private:
-
 	//CONSTANT
 	const IID IID_IAudioEndpointVolume = __uuidof(IAudioEndpointVolume);
 	const IID IID_IAudioSessionManager2 = __uuidof(IAudioSessionManager2);

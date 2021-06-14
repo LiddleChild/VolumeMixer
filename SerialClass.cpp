@@ -34,7 +34,7 @@ Serial::Serial(const char* portName)
         }
         else
         {
-            printf("ERROR!!!");
+            printf("ERROR!!!\n");
         }
     }
     else

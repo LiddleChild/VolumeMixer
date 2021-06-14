@@ -16,8 +16,7 @@ HWND consoleWindow;
 Serial* sp = NULL;
 Audio* audio = NULL;
 Window* window = NULL;
-
-Config config;
+Config* config = NULL;
 
 int windowTimer = -1, windowTimerMax = 100;
 int sel = 0, maxsel = 1;
@@ -47,14 +46,15 @@ void onWindowClose() {
 
 #pragma region Init Serial
 void initSerial() {
-    sp = new Serial(config.port.c_str());
+    log("main.cpp", "Initializing serial connection");
+    sp = new Serial(config->port.c_str());
     
     while (!sp->IsConnected()) {
-        sp = new Serial(config.port.c_str());
+        sp = new Serial(config->port.c_str());
         Sleep(2000);
     }
 
-    if (sp->IsConnected()) printf("%s Serial connection initialized \u001b[42;1m%s\u001b[0m\n", "[main.cpp]", config.port.c_str());
+    if (sp->IsConnected()) printf("%s Serial connection initialized \u001b[42;1m%s\u001b[0m\n", "[main.cpp]", config->port.c_str());
 }
 #pragma endregion
 #pragma region Init WASAPI
@@ -76,7 +76,7 @@ void hideConsole() {
     AllocConsole();
     consoleWindow = FindWindowA("ConsoleWindowClass", NULL);
     SendMessage(consoleWindow, WM_KILLFOCUS, NULL, NULL);
-    ShowWindow(consoleWindow, config.showConsole);
+    ShowWindow(consoleWindow, config->showConsole);
 }
 
 #pragma endregion
@@ -88,7 +88,8 @@ void updateAudioProcess() {
 }
 
 int main() {
-    config.loadConfig();
+    config = new Config();
+    config->loadConfig();
 
     hideConsole();
 

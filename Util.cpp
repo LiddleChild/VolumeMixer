@@ -1,35 +1,27 @@
-#pragma once
-
-#include <string>
-#include <locale>
-#include <codecvt>
-#include <audiopolicy.h>
-#include <TlHelp32.h>
-
-#include "Debugger.h"
+#include "Util.h"
 
 static std::wstring s2ws(const std::string& str)
 {
-    using convert_typeX = std::codecvt_utf8<wchar_t>;
-    std::wstring_convert<convert_typeX, wchar_t> converterX;
+	using convert_typeX = std::codecvt_utf8<wchar_t>;
+	std::wstring_convert<convert_typeX, wchar_t> converterX;
 
-    return converterX.from_bytes(str);
+	return converterX.from_bytes(str);
 }
 
 static std::string ws2s(const std::wstring& wstr)
 {
-    using convert_typeX = std::codecvt_utf8<wchar_t>;
-    std::wstring_convert<convert_typeX, wchar_t> converterX;
+	using convert_typeX = std::codecvt_utf8<wchar_t>;
+	std::wstring_convert<convert_typeX, wchar_t> converterX;
 
-    return converterX.to_bytes(wstr);
+	return converterX.to_bytes(wstr);
 }
 
 static DWORD getProcessId(IAudioSessionControl2* pControl2) {
-    DWORD id;
-    HRESULT hr = pControl2->GetProcessId(&id);
-    error(hr, "(Process.cpp::getProcessId) IAudioSessionControl2::GetProcessId");
+	DWORD id;
+	HRESULT hr = pControl2->GetProcessId(&id);
+	error(hr, "(Process.cpp::getProcessId) IAudioSessionControl2::GetProcessId");
 
-    return id;
+	return id;
 }
 
 static std::wstring getProcessName(DWORD pid) {

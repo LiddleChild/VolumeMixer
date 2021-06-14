@@ -99,9 +99,10 @@ void Device::clearProcess() {
 
 std::wstring Device::nameDict(std::wstring name) {
 	std::map<std::wstring, std::wstring> dict;
-	dict[L"discord.exe"] = L"Discord";
+	dict[L"Discord.exe"] = L"Discord (Group)";
 
 	return dict[name] == L"" ? name : dict[name];
+	//return Config::get().processNameDicts[name] == L"" ? name : Config::get().processNameDicts[name];
 }
 
 #pragma endregion
