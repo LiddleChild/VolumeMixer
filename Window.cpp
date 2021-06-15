@@ -26,7 +26,7 @@ Window::Window() {
     //Set view
     view = window->getView();
 
-    log("Window.cpp", "Window initialized");
+    log("Window.cpp", "Window initialized\n");
 }
 
 #pragma endregion

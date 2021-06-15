@@ -58,7 +58,7 @@ void Config::loadConfig() {
             }
         }
 
-        log("Config.cpp", "Config loaded");
+        log("Config.cpp", "Config loaded\n");
 
         config.close();
     }

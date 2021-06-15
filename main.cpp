@@ -16,9 +16,10 @@ HWND consoleWindow;
 Serial* sp = NULL;
 Audio* audio = NULL;
 Window* window = NULL;
-Config* config = NULL;
 
-int windowTimer = -1, windowTimerMax = 100;
+Config* config = Config::get();
+
+int windowTimer = -1, windowTimerMax = 50;
 int sel = 0, maxsel = 1;
 int windowVisible = 0;
 
@@ -26,9 +27,8 @@ int windowVisible = 0;
 void onWindowOpen() {
     log("main.cpp", "\u001b[32mWindow Open\u001b[0m");
 
-    log("main.cpp", "Updating all processes");
     //Update all processes
-    log("main.cpp", "Update Core Audio API");
+    log("main.cpp", "Updating Core Audio API");
     audio->updateProcess();
     log("main.cpp", "Update window");
     window->loadDevice(audio->getCurrentDevice());
@@ -47,14 +47,14 @@ void onWindowClose() {
 #pragma region Init Serial
 void initSerial() {
     log("main.cpp", "Initializing serial connection");
-    sp = new Serial(config->port.c_str());
-    
-    while (!sp->IsConnected()) {
-        sp = new Serial(config->port.c_str());
-        Sleep(2000);
-    }
+    const char* port = config->port.c_str();
 
-    if (sp->IsConnected()) printf("%s Serial connection initialized \u001b[42;1m%s\u001b[0m\n", "[main.cpp]", config->port.c_str());
+    do {
+        sp = new Serial(port);
+        Sleep(2000);
+    } while (!sp->IsConnected());
+
+    if (sp->IsConnected()) printf("%s Serial connection initialized on \u001b[32m%s\u001b[0m\n\n", "[main.cpp]", port);
 }
 #pragma endregion
 #pragma region Init WASAPI
@@ -88,7 +88,6 @@ void updateAudioProcess() {
 }
 
 int main() {
-    config = new Config();
     config->loadConfig();
 
     hideConsole();

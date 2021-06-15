@@ -3,7 +3,7 @@
 #pragma region PRIVATE Audio::logCurrentDevice(): void
 
 void Audio::logCurrentDevice() {
-    wprintf(L"[Audio.cpp] Current Device \u001b[42;1m%s\u001b[0m\n", devices[currentDeviceID]->name);
+    wprintf(L"[Audio.cpp] Current Device \u001b[32m%s\u001b[0m\n\n", devices[currentDeviceID]->name);
 }
 
 #pragma endregion

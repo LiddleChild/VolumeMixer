@@ -20,7 +20,7 @@ class Config {
 
 private:
 	//VARIABLE
-	static Config instance;
+	//static Config* instance;
 
 	//FUNCTION
 	std::vector<std::string> split2(std::string, char);
@@ -30,16 +30,19 @@ public:
 	std::string port;
 	int showConsole;
 
-	float masterVolumeStep;
-	float processVolumeStep;
+	//float masterVolumeStep;
+	//float processVolumeStep;
 
 	std::map<std::wstring, std::wstring> processNameDicts;
 
 	//METHOD
 	void loadConfig();
 
-	static Config& get() {
-		return instance;
+	//static Config& get() { return *instance; }
+
+	static Config* get() {
+		static Config instance;
+		return &instance;
 	}
 
 };

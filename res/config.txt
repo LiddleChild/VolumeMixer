@@ -2,3 +2,4 @@ PORT=COM5
 SHOW_CONSOLE=1
 
 DICT=Discord.exe,Discord (Group)
+DICT=chrome.exe,Browser (Chrome)

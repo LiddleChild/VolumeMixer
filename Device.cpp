@@ -37,22 +37,22 @@ void Device::getAllProcess() {
 
 		//Add to dict
 		std::wstring pname = getProcessName(pid);
-		std::wstring newpname = nameDict(pname);
+		std::wstring processesName = nameDict(pname);
 		
 		//Merge same process name into one process
-		if (processes[newpname] != nullptr)
-			processes[newpname]->addProcess(pControl);
+		if (processes[processesName] != nullptr)
+			processes[processesName]->addProcess(pControl);
 		else {
-			Process* p = new Process(newpname);
+			Process* p = new Process(processesName);
 			p->addProcess(pControl);
 			
-			processes[newpname] = p;
+			processes[processesName] = p;
 		}
 
 		pControl2->Release();
 
-		if (pname == newpname) wprintf(L"\t\t| (%5d) %s\n", pid, pname.c_str());
-		else wprintf(L"\t\t| (%5d) %s (%s)\n", pid, pname.c_str(), newpname.c_str());
+		if (pname == processesName) wprintf(L"\t\t| (%5d) %s\n", pid, pname.c_str());
+		else wprintf(L"\t\t| (%5d) %s (%s)\n", pid, pname.c_str(), processesName.c_str());
 	}
 
 	pManager->Release();
@@ -98,11 +98,7 @@ void Device::clearProcess() {
 #pragma region PRIVATE Device::nameDict(std::wstring): std::wstring
 
 std::wstring Device::nameDict(std::wstring name) {
-	std::map<std::wstring, std::wstring> dict;
-	dict[L"Discord.exe"] = L"Discord (Group)";
-
-	return dict[name] == L"" ? name : dict[name];
-	//return Config::get().processNameDicts[name] == L"" ? name : Config::get().processNameDicts[name];
+	return Config::get()->processNameDicts[name] == L"" ? name : Config::get()->processNameDicts[name];
 }
 
 #pragma endregion
