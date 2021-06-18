@@ -145,6 +145,6 @@ int main() {
             window->update();
         } else Sleep(100);
     }
-    
+
     return 0;
 }

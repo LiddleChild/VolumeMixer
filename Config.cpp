@@ -16,7 +16,6 @@ std::vector<std::string> Config::split2(std::string str, char c) {
 }
 
 #pragma endregion
-
 #pragma region PUBLIC Config::loadConfig(): void
 
 void Config::loadConfig() {
@@ -49,10 +48,17 @@ void Config::loadConfig() {
                 else if (setting == "DICT") {
                     std::vector<std::string> v = split2(value, ',');
                     if (v.size() > 0) {
-                        std::string key = v[0];
-                        std::string val = v[1];
+                        std::string val = v[0];
+                        std::string key = v[1];
 
-                        processNameDicts[s2ws(key)] = s2ws(val);
+                        int j = 0;
+                        for (int i = 0; i < key.size(); i++) {
+                            if (i > 0 && key[i - 1] == '[') j = i;
+                            else if (key[i] == ',' || key[i] == ']') {
+                                processNameDicts[s2ws(std::string(key.begin() + j, key.begin() + i))] = s2ws(val);
+                                j = i + 1;
+                            }
+                        }
                     }
                 }
             }

@@ -1,5 +1,5 @@
 PORT=COM5
 SHOW_CONSOLE=1
 
-DICT=Discord.exe,Discord (Group)
-DICT=chrome.exe,Browser (Chrome)
+DICT=Discord,[Discord.exe]
+DICT=Steam,[steam.exe,steamwebhelper.exe]
