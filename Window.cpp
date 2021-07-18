@@ -129,10 +129,9 @@ void Window::show() {
     log("Window.cpp", "Show");
     
     visible = 1;
-    ShowWindow(window->getSystemHandle(), 1); //Show window
-
     hr = SendMessage(window->getSystemHandle(), WM_KILLFOCUS, NULL, NULL); //Don't focus on window
-    SetWindowPos(window->getSystemHandle(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE); //Set window topmost
+    ShowWindow(window->getSystemHandle(), 1); //Show window
+    SetWindowPos(window->getSystemHandle(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE); //Set window topmosts
     error(hr, "(Window.cpp::show) SendMessage");
 }
 

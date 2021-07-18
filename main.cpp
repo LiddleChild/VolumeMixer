@@ -66,7 +66,6 @@ void initWASAPI() {
 void initWindow() {
     window = new Window();
     window->loadDevice(audio->getCurrentDevice());
-    windowTimer = 0;
 }
 #pragma endregion
 
@@ -96,6 +95,9 @@ int main() {
     initWASAPI();
     initWindow();
 
+    std::string str("init");
+    sp->WriteData(str.c_str(), str.size());
+
     log("main.cpp", "\u001b[32mREADY\u001b[0m\n");
 
     char data[256];
@@ -104,24 +106,26 @@ int main() {
 
         data[i] = 0;
         if (strlen(data) > 0) {
-            switch (data[0]) {
-            case '+':
-                if (sel == 0) audio->increment();
-                else audio->getCurrentDevice()->getProcess(sel - 1)->increment();
-                break;
+            if (window->isVisible()) {
+                switch (data[0]) {
+                case '+':
+                    if (sel == 0) audio->increment();
+                    else audio->getCurrentDevice()->getProcess(sel - 1)->increment();
+                    break;
 
-            case '-':
-                if (sel == 0) audio->decrement();
-                else audio->getCurrentDevice()->getProcess(sel - 1)->decrement();
-                break;
+                case '-':
+                    if (sel == 0) audio->decrement();
+                    else audio->getCurrentDevice()->getProcess(sel - 1)->decrement();
+                    break;
 
-            case '>':
-                sel = sel == maxsel - 1 ? maxsel - 1 : sel + 1;
-                break;
+                case '>':
+                    sel = sel == maxsel - 1 ? maxsel - 1 : sel + 1;
+                    break;
 
-            case '<':
-                sel = sel == 0 ? 0 : sel - 1;
-                break;
+                case '<':
+                    sel = sel == 0 ? 0 : sel - 1;
+                    break;
+                }
             }
 
             if (!window->isVisible()) onWindowOpen();

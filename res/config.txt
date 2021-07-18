@@ -1,4 +1,4 @@
-PORT=COM5
+PORT=COM3
 SHOW_CONSOLE=1
 
 DICT=Discord,[Discord.exe]
