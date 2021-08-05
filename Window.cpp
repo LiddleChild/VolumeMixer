@@ -11,7 +11,9 @@ Window::Window() {
     * WS_EX_TOOLWINDOW  - Window with no border and no taskbar icon
     * WS_EX_TOPMOST     - Window with the topmost layer
     */
-    hr = SetWindowLong(window->getSystemHandle(), GWL_EXSTYLE, WS_EX_TOOLWINDOW | WS_EX_TOPMOST);
+    //hr = SetWindowLong(window->getSystemHandle(), GWL_EXSTYLE, WS_EX_TOOLWINDOW | WS_EX_TOPMOST);
+    SetWindowPos(window->getSystemHandle(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE); //Set window topmosts
+    hr = SetWindowLong(window->getSystemHandle(), GWL_EXSTYLE, WS_EX_NOACTIVATE);
     error(hr, "(Window.cpp::Window) SetWindowLong");
     
     MARGINS margins;
@@ -129,10 +131,10 @@ void Window::show() {
     log("Window.cpp", "Show");
     
     visible = 1;
-    hr = SendMessage(window->getSystemHandle(), WM_KILLFOCUS, NULL, NULL); //Don't focus on window
     ShowWindow(window->getSystemHandle(), 1); //Show window
-    SetWindowPos(window->getSystemHandle(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE); //Set window topmosts
-    error(hr, "(Window.cpp::show) SendMessage");
+    //hr = SendMessage(window->getSystemHandle(), WM_KILLFOCUS, NULL, NULL); //Don't focus on window
+    //error(hr, "(Window.cpp::show) SendMessage");
+    //SetFocus(NULL);
 }
 
 #pragma endregion
