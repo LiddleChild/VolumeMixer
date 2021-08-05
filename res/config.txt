@@ -3,3 +3,5 @@ SHOW_CONSOLE=1
 
 DICT=Discord,[Discord.exe]
 DICT=Steam,[steam.exe,steamwebhelper.exe]
+DICT=PUBG,[TslGame.exe]
+DICT=Line,[LINE.exe,LineMediaPlayer.exe]

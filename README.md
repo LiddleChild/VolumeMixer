@@ -1,4 +1,4 @@
 # VolumeMixer
-Arduino Project which control Volume Mixer in Windows
+A windows volume mixer controller via Arduino (w/ Rotary Encoder)
 ## Dependencies
 - SFML x64
